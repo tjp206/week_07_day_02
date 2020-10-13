@@ -10,9 +10,9 @@
 
     <country-detail :country="selectedCountry"></country-detail>
 
-    <button>Add Country</button>
+    <button v-on:click="addFavourite">Add Country</button>
 
-    <favourite-countries></favourite-countries>
+    <favourite-countries :favouriteCountries="favouriteCountries"></favourite-countries>
 </div>
 
 </template>
@@ -49,6 +49,9 @@ export default {
         const request = fetch('https://restcountries.eu/rest/v2/all')
         .then(response => response.json())
         .then(data => this.countries = data)
+    },
+      addFavourite: function() {
+        this.favouriteCountries.push(this.selectedCountry);
     },
   },
 }
