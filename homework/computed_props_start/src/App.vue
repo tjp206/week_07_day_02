@@ -2,9 +2,14 @@
   <div id="app">
     <header>
       <h1>Bank of CodeClan</h1>
-      <h2>Total deposits: £ </h2>
+      <h2>Total deposits: £{{ totalBalances }} </h2>
       <p>Total Deposits ☝️ should update dynamically when we add a new account.</p>
     </header>
+
+    <div id="filterInput">  <!-- NEW-->
+      <h3>Filter Accounts By Minimum Value</h3>
+      <input type="number" v-model.number="filterAmount"/>
+    </div>
 
     <form v-on:submit.prevent="saveAccount">
       <h3>Add a new Account</h3>
@@ -14,7 +19,7 @@
     </form>
 
     <section>
-      <div class="account" v-for="account in accounts">
+      <div class="account" v-for="account in filteredAccounts">
         <h2>{{ account.name }}</h2>
         <p>Balance: £{{ account.balance }}</p>
       </div>
@@ -37,8 +42,18 @@ export default {
       newAccount: {
         name: "",
         balance: 0
-      }
+      },
+      filterAmount: 0
     }
+  },
+  computed: {
+    totalBalances: function(){ 
+      return this.accounts.reduce((total, account) => total + account.balance, 0);
+    },
+    filteredAccounts: function(){ 
+      return this.accounts.filter((account) => {
+        return account.balance >= this.filterAmount;
+    });
   },
     methods: {
       saveAccount: function(){
@@ -48,8 +63,9 @@ export default {
           name: "",
           balance: 0
         };
-      }
-    }
+      },
+    },
+}
 }
 </script>
 
