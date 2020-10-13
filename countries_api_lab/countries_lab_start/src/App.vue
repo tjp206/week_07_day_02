@@ -36,9 +36,7 @@ export default {
   },
     computed: {
       globalPopulation: function () {
-        return this.countries.reduce((population, country) => {
-            return population += country.population;
-        }, 0) 
+        return this.countPopulation()
       }
     },
     mounted(){
@@ -53,6 +51,11 @@ export default {
       addFavourite: function() {
         this.favouriteCountries.push(this.selectedCountry);
     },
+    countPopulation: function () {
+        return this.countries.reduce((population, country) => {
+            return population += country.population;
+        }, 0) 
+      }
   },
 }
 

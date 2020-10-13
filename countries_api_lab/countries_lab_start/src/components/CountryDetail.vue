@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="selected_country">
+  <div v-if="country" id="selected_country">
     <h2> {{ country.name }} </h2>
     <p> Population: {{ country.population }} </p>
     <img class="lrg-flag" :src="country.flag" />
