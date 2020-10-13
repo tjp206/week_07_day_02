@@ -1,8 +1,8 @@
 <template lang="html">
   <div id="selected_country">
-    <h2> Country Name </h2>
-    <p> Population:  </p>
-    <img class="lrg-flag" />
+    <h2> {{ country.name }} </h2>
+    <p> Population: {{ country.population }} </p>
+    <img class="lrg-flag" :src="country.flag" />
 
     <neighbouring-countries>
     </neighbouring-countries>
@@ -14,7 +14,7 @@
 import NeighbourCountry from './NeighbourCountry.vue';
 export default {
   name: 'country-detail',
-  props: [],
+  props: ['country'],
   components: {
     'neighbouring-countries': NeighbourCountry
   }
