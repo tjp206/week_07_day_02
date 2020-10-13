@@ -1,9 +1,12 @@
 <template lang="html">
   <div id="neighbouring_countries">
   <h3>Neighbouring Countries</h3>
-  <p>Total population for neighbouring countries: </p>
+  <p>Total population for neighbouring countries: {{ neighbouringCountriesPopulation }} </p>
     <ul id="neighbouring_countries">
-
+      <li v-for="neighbouringCountry in neighbouringCountries">
+        <p>{{ neighbouringCountry.name }}</p>
+        <img class="med-flag" :src="neighbouringCountry.flag"/>
+      </li>
     </ul>
   </div>
 </template>
@@ -11,9 +14,14 @@
 <script>
 export default {
   name: 'neighbouring-countries',
-  props: [],
+  props: ['neighbouringCountries', 'countPopulation'],
   computed: {
-  }
+    computed: {
+    neighbouringCountriesPopulation: function() {
+      return countPopulation(this.neighbouringCountries);
+      }
+    },
+  },
 }
 </script>
 

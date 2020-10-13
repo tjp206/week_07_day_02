@@ -36,7 +36,12 @@ export default {
   },
     computed: {
       globalPopulation: function () {
-        return this.countPopulation()
+        return this.countPopulation(this.countries)
+      },
+      neighbouringCountries: function(){
+        return this.countries.filter((country) => {
+          return this.selectedCountry.borders.includes(country.alpha3Code);
+        });
       }
     },
     mounted(){
@@ -51,10 +56,10 @@ export default {
       addFavourite: function() {
         this.favouriteCountries.push(this.selectedCountry);
     },
-    countPopulation: function () {
+    countPopulation: function (countries) {
         return this.countries.reduce((population, country) => {
             return population += country.population;
-        }, 0) 
+        }, 0);
       }
   },
 }
